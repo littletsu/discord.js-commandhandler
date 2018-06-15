@@ -14,7 +14,7 @@ const config = require("./utils/config.json");
 
 // Handlers
 
-fs.readdir("./events/", (err, files) => {
+fs.readdir("./src/events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     let eventFunction = require(`./src/events/${file}`);
