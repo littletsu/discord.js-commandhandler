@@ -14,7 +14,7 @@ const config = require("./utils/config.json");
 
 // Handlers
 
-fs.readdir("./events/", (err, files) => {
+fs.readdir("./src/events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     let eventFunction = require(`./src/events/${file}`);
@@ -29,14 +29,13 @@ fs.readdir('./src/commands/', (err, files) => {
     if (err)
         console.error(err);
     let jsfiles = files.filter(f => f.split('.').pop() === 'js');
-    if (jsfiles.length <= 0) {
-        utils.uCError('No commands found.')
-    }
+    if (jsfiles.length <= 0) return utils.uCError('No commands found.');
+
     jsfiles.forEach(f => {
         let props = require(`./src/commands/${ f }`);
         props.fileName = f;
         client.commands.set(props.help.name, props);
-        props.conf.aliases.forEach(alias => {
+        props.help.aliases.forEach(alias => {
             client.aliases.set(alias, props.help.name);
         });
     });
@@ -49,16 +48,16 @@ client.on("message", message => {
   if(message.content.indexOf(config.prefix) !== 0) return;
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+  let command = args.shift().toLowerCase();
 
-  if(client.aliases.has(command)) command = client.commands.get(client.aliases.get(command))
+  if(client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name
 
   if(client.commands.get(command).config.restricted == true) {
     if(message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:')
   }
 
-  if(client.commands.get(command).args == true) {
-    if(!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: \`${config.prefix + client.commands.get(command).help.name + 'help'}\``)
+  if(client.commands.get(command).config.args == true) {
+    if(!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${config.prefix + 'help ' + client.commands.get(command).help.name}`)
   }
 
   try {
