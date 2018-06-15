@@ -8,5 +8,5 @@ Required Packages:
 What you will need:
 - A brain
 
-Commands are being saved in: `src/commands`
+Commands are being saved in: `src/commands`\
 Events are being saved in: `src/events`
