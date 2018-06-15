@@ -4,3 +4,6 @@
 Required Packages: 
 - discord.js-dev (master)
 - fs
+
+What you will need:
+- A brain
