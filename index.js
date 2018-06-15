@@ -26,9 +26,8 @@ fs.readdir("./src/events/", (err, files) => {
 });
 
 fs.readdir('./src/commands/', (err, files) => {
-    if (err)
-        console.error(err);
-    jsfiles.forEach(f => {
+    if (err) console.error(err);
+    files.forEach(f => {
         let props = require(`./src/commands/${ f }`);
         props.fileName = f;
         client.commands.set(props.help.name, props);
