@@ -1,5 +1,5 @@
 # discord.js-commandhandler
-## A simple command and event handler with examples made by me (Etzyy), with some code of anidiotsguide.
+## A simple command and event handler with examples made by me (Etzyy), with some code of [anidiotsguide](https://anidiotsguide_old.gitbooks.io/discord-js-bot-guide/coding-guides/a-basic-command-handler.html).
 
 Required Packages: 
 - discord.js-dev (master)
