@@ -14,7 +14,7 @@ const config = require("./utils/config.json");
 
 // Handlers
 
-fs.readdir("./src/events/", (err, files) => {
+fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     let eventFunction = require(`./src/events/${file}`);
@@ -29,13 +29,14 @@ fs.readdir('./src/commands/', (err, files) => {
     if (err)
         console.error(err);
     let jsfiles = files.filter(f => f.split('.').pop() === 'js');
-    if (jsfiles.length <= 0) return utils.uCError('No commands found.');
-
+    if (jsfiles.length <= 0) {
+        utils.uCError('No commands found.')
+    }
     jsfiles.forEach(f => {
         let props = require(`./src/commands/${ f }`);
         props.fileName = f;
         client.commands.set(props.help.name, props);
-        props.help.aliases.forEach(alias => {
+        props.conf.aliases.forEach(alias => {
             client.aliases.set(alias, props.help.name);
         });
     });
