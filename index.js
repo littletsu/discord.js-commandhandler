@@ -1,9 +1,8 @@
+// Definitions
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-
-// s0m3 collections
-
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.events = new Discord.Collection();
@@ -30,14 +29,13 @@ fs.readdir('./src/commands/', (err, files) => {
     if (err)
         console.error(err);
     let jsfiles = files.filter(f => f.split('.').pop() === 'js');
-    if (jsfiles.length <= 0) {
-        utils.uCError('No commands found.')
-    }
+    if (jsfiles.length <= 0) return utils.uCError('No commands found.');
+
     jsfiles.forEach(f => {
         let props = require(`./src/commands/${ f }`);
         props.fileName = f;
         client.commands.set(props.help.name, props);
-        props.conf.aliases.forEach(alias => {
+        props.help.aliases.forEach(alias => {
             client.aliases.set(alias, props.help.name);
         });
     });
