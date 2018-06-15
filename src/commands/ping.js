@@ -21,6 +21,7 @@ module.exports.config = {
 // Aliases, name, description and usage
 
 module.exports.help = {
+    aliases: ['peng', 'pepo', 'saymepinguselessbot']
     name: 'ping',
     description: 'pong wow!',
     usage: 'PREFIXping'
