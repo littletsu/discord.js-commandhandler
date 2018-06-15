@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "github:hydrabolt/discord.js",
-    "enmap": "^2.6.1",
     "fs": "0.0.1-security"
   }
 }
