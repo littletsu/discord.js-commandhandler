@@ -28,9 +28,6 @@ fs.readdir("./src/events/", (err, files) => {
 fs.readdir('./src/commands/', (err, files) => {
     if (err)
         console.error(err);
-    let jsfiles = files.filter(f => f.split('.').pop() === 'js');
-    if (jsfiles.length <= 0) return utils.uCError('No commands found.');
-
     jsfiles.forEach(f => {
         let props = require(`./src/commands/${ f }`);
         props.fileName = f;
