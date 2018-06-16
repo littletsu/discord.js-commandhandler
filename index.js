@@ -40,26 +40,30 @@ fs.readdir('./src/commands/', (err, files) => {
 // Message Event (here because something could happen with event handler.)
 
 client.on("message", message => {
-  if (message.author.bot) return;
-  if(message.content.indexOf(config.prefix) !== 0) return;
-
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  let command = args.shift().toLowerCase();
-
-  if(client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name
-
-  if(client.commands.get(command).config.restricted == true) {
-    if(message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:')
-  }
-
-  if(client.commands.get(command).config.args == true) {
-    if(!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${config.prefix + 'help ' + client.commands.get(command).help.name}`)
-  }
-
+  
   try {
+    
+    if (message.author.bot) return;
+    if(message.content.indexOf(config.prefix) !== 0) return;
+
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    let command = args.shift().toLowerCase();
+
+    if(client.aliases.has(command)) command = client.commands.get(client.aliases.get(command)).help.name
+
+    if(client.commands.get(command).config.restricted == true) {
+      if(message.author.id !== config.ownerID) return utils.errorEmbed(message, ':warning: This command is restricted only to bot owners. :warning:')
+    }
+
+    if(client.commands.get(command).config.args == true) {
+      if(!args[0]) return utils.errorEmbed(message, `Invalid arguments. Use: ${config.prefix + 'help ' + client.commands.get(command).help.name}`)
+    }
+
     let commandFile = require(`./src/commands/${command}.js`);
     commandFile.run(client, message, args, utils);
+    
   } catch (err) {
+    if(err.message === `Cannot read property 'config' of undefined`) return;
     console.error(err);
   }
 });
