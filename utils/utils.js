@@ -18,3 +18,10 @@ module.exports.errorEmbed = function(message, errorMessage) {
         msg.delete(2000)
     })
 }
+
+module.exports.quickEmbed = function(message, content, color) {
+    const quickEmbed = new Discord.RichEmbed();
+    if(color) quickEmbed.setColor(color)
+    quickEmbed.setDescription(content)
+    message.channel.send({embed: quickEmbed})
+}
