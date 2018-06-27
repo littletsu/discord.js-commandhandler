@@ -20,7 +20,7 @@ module.exports.errorEmbed = function(message, errorMessage) {
 }
 
 module.exports.quickEmbed = function(message, content, color) {
-    const quickEmbed = new Discord.RichEmbed();
+    const quickEmbed = new Discord.MessageEmbed();
     if(color) quickEmbed.setColor(color)
     quickEmbed.setDescription(content)
     message.channel.send({embed: quickEmbed})
