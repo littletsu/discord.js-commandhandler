@@ -25,3 +25,9 @@ module.exports.quickEmbed = function(message, content, color) {
     quickEmbed.setDescription(content)
     message.channel.send({embed: quickEmbed})
 }
+
+module.exports.selectRandom = function(array) {
+    if(typeof array !== "object") return;
+    return array[Math.floor((Math.random() * array.length) + 0)];
+}
+
