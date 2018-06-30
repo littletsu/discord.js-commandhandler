@@ -11,7 +11,7 @@ module.exports.uCWarning = function(warningMessage) {
 module.exports.prefix = require('./config.json').prefix
 
 module.exports.errorEmbed = function(message, errorMessage) {
-    const errorEmbed = new Discord.RichEmbed()
+    const errorEmbed = new Discord.MessageEmbed()
     .setColor(`RED`)
     .setTitle(errorMessage)
     message.channel.send({embed: errorEmbed}).then(msg => {
@@ -20,7 +20,7 @@ module.exports.errorEmbed = function(message, errorMessage) {
 }
 
 module.exports.quickEmbed = function(message, content, color) {
-    const quickEmbed = new Discord.RichEmbed();
+    const quickEmbed = new Discord.MessageEmbed();
     if(color) quickEmbed.setColor(color)
     quickEmbed.setDescription(content)
     message.channel.send({embed: quickEmbed})
