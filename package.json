@@ -9,7 +9,7 @@
   "author": "Etzyy",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "github:hydrabolt/discord.js",
+    "discord.js": "^11.3.2",
     "fs": "0.0.1-security"
   }
 }
